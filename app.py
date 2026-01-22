@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from google import genai # This is the line that was failing
+from google import genai  
 from google.genai import types
 import os
 from PIL import Image
