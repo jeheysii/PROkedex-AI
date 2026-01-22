@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from google import genai # NEW 2026 SDK
+from google import genai # This is the line that was failing
 import os
 from PIL import Image
 from dotenv import load_dotenv
@@ -17,19 +17,10 @@ try:
 except Exception:
     st.set_page_config(page_title="PROkedex AI", page_icon="🔮", layout="centered")
 
-# --- 2. THEME & UI ---
-st.markdown("""
-    <style>
-    [data-testid="stSidebar"] { display: none; }
-    .stApp { background-color: #1a1121; color: white; }
-    [data-testid="stChatMessageUser"] { background-color: #F8008A !important; border-radius: 15px; }
-    [data-testid="stChatMessageAssistant"] { background-color: #f0f2f6 !important; border-radius: 15px; color: #1a1a1a !important; }
-    </style>
-    """, unsafe_allow_html=True)
-
-# --- 3. 2026 AI CLIENT SETUP ---
+# --- 3. 2026 SDK CLIENT SETUP ---
 api_key = os.getenv("GEMINI_API_KEY") or st.secrets.get("GEMINI_API_KEY")
-client = genai.Client(api_key=api_key) # New Client Syntax
+# The Client handles authentication automatically if GEMINI_API_KEY is in secrets
+client = genai.Client(api_key=api_key)
 
 @st.cache_data
 def load_data():
