@@ -11,15 +11,15 @@ load_dotenv()
 
 try:
     # Ensure masterball-icon.png is in your GitHub root folder
-    icon_image = Image.open("masterball-icon.png")
+    icon_image = Image.open("./masterball-icon.png")
     st.set_page_config(
-        page_title="PROkedex AI 2.5",
+        page_title="PROkedex AI",
         page_icon=icon_image,
         layout="centered", # Keeps the content focused in the middle
         initial_sidebar_state="collapsed"
     )
 except Exception:
-    st.set_page_config(page_title="PROkedex AI 2.5", page_icon="🔮", layout="centered")
+    st.set_page_config(page_title="PROkedex AI", page_icon="🔮", layout="centered")
 
 # --- 2. LAYOUT & MASTERBALL THEME ---
 # Create a 1/3 centered view using columns
@@ -51,12 +51,12 @@ with col2:
         """, unsafe_allow_html=True)
 
     st.markdown("<h1 class='title-text'>🛡️ PROkedex AI 2.5</h1>", unsafe_allow_html=True)
-    st.caption("Centered Battle Intelligence | Powered by Gemini 2.5")
+    st.caption("Centered Battle Intelligence | Powered by Gemini 2.0")
 
     # --- 3. DATA & AI INITIALIZATION ---
     api_key = os.getenv("GEMINI_API_KEY") or st.secrets.get("GEMINI_API_KEY")
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-2.5-flash-exp')
+    model = genai.GenerativeModel('gemini-2.0-flash-exp')
 
     @st.cache_data
     def load_data():
